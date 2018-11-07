@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-6">
+      <div class="panel" >
+          <div class="panel-heading ">
+              <h3 class="panel-title">Feedbacks By Browser</h3>
+          </div>
+          <div class="panel-body" >
+              <canvas baseChart
+                [data]="browserChartData"
+                [labels]="browserChartLabels"
+                [chartType]="browserChartType">
+              </canvas>
+          </div>
+      </div>
+  </div>
+  <div class="col-md-6">
+      <div class="panel" >
+          <div class="panel-heading ">
+              <h3 class="panel-title">Feedbacks Status</h3>
+          </div>
+          <div class="panel-body" >
+              <canvas baseChart
+              [data]="statusChartData"
+              [labels]="statusChartLabels"
+              [chartType]="statusChartType">
+              </canvas>
+          </div>
+      </div>
+  </div>
+  
+</div>
+<div class="row">
+    <div class="col-md-10">
+        <div class="panel" >
+            <div class="panel-heading ">
+                <h3 class="panel-title">Feedbacks By Location</h3>
+            </div>
+            <div class="panel-body" >
+                <canvas baseChart
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType">
+              </canvas>
+            </div>
+        </div>
+    </div>
+  </div>
+

@@ -1,0 +1,31 @@
+.panel {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    margin-bottom: 30px;
+    border: 1px solid #d1d6e6;
+    background: #fff;
+}
+.panel .panel-heading {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    position: relative;
+    line-height: 1;
+    border-bottom: 1px solid #eaeff2;
+    background-color: #f8f9fa;
+}
+.panel .panel-heading, .panel .panel-body, .panel .panel-footer {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.panel .panel-heading .panel-title {
+    display: inline-block;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #717d84;
+}
+

@@ -1,0 +1,9 @@
+img .logo{
+    width: 60% !important;
+}
+.bg-light {
+    background-color: #00A5C9 !important;
+}
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
+    color: white;
+}
