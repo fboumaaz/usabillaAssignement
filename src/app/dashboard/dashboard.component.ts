@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RatingService } from '../services/rating.service';
 import _ from 'underscore';
+import { Feedback } from '../models/feedback';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,32 +10,38 @@ import _ from 'underscore';
 })
 export class DashboardComponent implements OnInit {
 
-  items : any[];
-  allRates : any []
+  items : Feedback[];
+  allRates : any [];
+  errorMsg : string;
 
   constructor( private ratingService : RatingService){
-    this.allRates = []
-    this.items = []
+    this.allRates = [];
+    this.items = [];
   };
 
+  /**initialize attributes of items by location chart */
   barChartOptions:any = {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  barChartLabels:string[] = [];
-  barChartType:string = 'bar';
-  barChartLegend:boolean = false;
-  barChartData:any[] = [{data: []}];
+  barChartLabels:string[] = []; //this is the chart labels
+  barChartType:string = 'bar'; //init chart type
+  barChartLegend:boolean = false; // init show legend attribute
+  barChartData:any[] = [{data: []}]; // init chart data
 
-  statusChartLabels:string[] = [];
-  statusChartData:number[] =[] ;
-  statusChartType:string = 'pie';
+  /**initialize attributes of items by status chart */
+  statusChartLabels:string[] = []; // init chart's labels
+  statusChartData:number[] =[] ; // init chart's data
+  statusChartType:string = 'pie'; // init chart's type
 
-  browserChartLabels:string[] = [];
-  browserChartData:number[] =[] ;
-  browserChartType:string = 'doughnut';
+  /**initialize attributes of items by browser chart */
+  browserChartLabels:string[] = []; //init chart's labels
+  browserChartData:number[] =[] ; // init chart's data
+  browserChartType:string = 'doughnut'; //init charts' type
 
-  //** initialize Feedbacks Status Chart */
+
+  /** This function to initialize Feedbacks Status Chart
+   */
   initFeedbacksStatusChart(){
     this.statusChartLabels = this.getUniqFields(this.items,'status');
     this.statusChartLabels.forEach(element => {
@@ -42,37 +49,31 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  filterArrByElement(arr,field,filter){
-    return arr.filter(element => {
-        if(filter)
-        return _.contains(element[filter],field)
-        else return _.contains(element,field)
-    }).length;
-  }
-
   //**initialize browsers chart */
   initFeedbacksByBrowserChart(){
-    var computedBrowser = _.pluck(this.items,'computed_browser')
-      var uniqBrowsers = this.getUniqFields(computedBrowser,'Browser');
-      //foreach
-      this.browserChartLabels = uniqBrowsers;
-      this.browserChartLabels.forEach(element => {
-        this.browserChartData.push(this.filterArrByElement(this.items,element,'computed_browser'))
-      });
+    let browsers = [];
+    this.items.forEach(item => {
+      if(item.computed_browser)browsers.push(item.computed_browser.Browser);
+    });
+    this.browserChartLabels = _.uniq(browsers);
+    this.browserChartLabels.forEach(browser => {
+      this.browserChartData.push(this.filterArrByElement(this.items,browser,'computed_browser'));
+    });
   }
 
-  getUniqFields(arr,field){
-    return  _.uniq(_.pluck(arr,field));
-  }
-  //** initialize Feedbacks By Location Chart */
-  initFeedbacksByLocationChart(){
-    this.barChartLabels = this.getUniqFields(this.items, 'computed_location')
+   //** initialize Feedbacks By Location Chart */
+   initFeedbacksByLocationChart(){
+    this.barChartLabels = this.getUniqFields(this.items, 'computed_location');
     this.barChartLabels.forEach(element => {
       this.barChartData[0].data.push(this.items.filter(item => {
           return _.contains(item,element)}).length)
     });  
   }
 
+  /**This function subscribe to ratingservice and call getItems function
+   * it invokes the initFeedbacksStatusChart function, initFeedbacksByBrowserChart function
+   * and the generateDeviceField function
+   */
   ngOnInit() {
     this.ratingService.getItems().subscribe( data => {
       this.items = data.json().items;      
@@ -80,7 +81,31 @@ export class DashboardComponent implements OnInit {
       this.initFeedbacksByBrowserChart();
       this.initFeedbacksByLocationChart();
     },error =>{
-      alert("An unexpected error occured");
+      this.errorMsg = "An unexpected DATA error occured";
     });
-  }  
+  } 
+
+  /** this function filter an array by property
+   * Returns number
+   * @param itemsArr 
+   * @param property 
+   * @param filter 
+   * @returns {number}
+   */
+  filterArrByElement(itemsArr,property,filter){
+    return itemsArr.filter(element => {
+        if(filter)
+        return _.contains(element[filter],property); //Returns true if the value is present in the list
+        else return _.contains(element,property); //Returns true if the value is present in the list
+    }).length;
+  }
+
+  /**This function allows you to extract a list of uniq property values  
+   * @param {Array} arr //this is the array
+   * @param {string} property //this is the property
+   * @returns {Array}
+   */
+  getUniqFields(arr,property){
+    return  _.uniq(_.pluck(arr,property));
+  }
 }

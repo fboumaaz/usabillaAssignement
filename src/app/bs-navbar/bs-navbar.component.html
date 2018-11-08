@@ -1,18 +1,18 @@
 
-    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-      <a class="navbar-brand " routerLink="/"><img width="60%" src ="https://d6tizftlrpuof.cloudfront.net/themes/production/usabilla-usabilla-new-theme-banner-logo-url-507c79056618be59e84a910f3f442d51.png"></a>
-      <button class="navbar-toggler " type="button" data-toggle="collapse" (click)="isNavbarCollapsed = !isNavbarCollapsed" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+  <a class="navbar-brand " routerLink="/"><img width="60%" src ="https://d6tizftlrpuof.cloudfront.net/themes/production/usabilla-usabilla-new-theme-banner-logo-url-507c79056618be59e84a910f3f442d51.png"></a>
+  <button class="navbar-toggler " type="button" data-toggle="collapse" (click)="isNavbarCollapsed = !isNavbarCollapsed" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-      <div class="collapse navbar-collapse" [ngbCollapse]="!isNavbarCollapsed" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item" [routerLinkActive]="['active']" >
-            <a class="nav-link" routerLink="/home"> Home </a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['active']" >
-            <a class="nav-link" routerLink="/feedbacks">Feedbacks</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+  <div class="collapse navbar-collapse" [ngbCollapse]="!isNavbarCollapsed" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" [routerLinkActive]="['active']" >
+        <a class="nav-link" routerLink="/dashboard"> Home </a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']" >
+        <a class="nav-link" routerLink="/feedbacks">Feedbacks</a>
+      </li>
+    </ul>
+  </div>
+</nav>

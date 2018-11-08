@@ -34,10 +34,7 @@
   .buttons-style {
     margin-top: -8px;
   }
-  .dot {
-    height: 50px;
-    width: 50px;
-    background-color: blue;
-    border-radius: 50%;
-    display: inline-block;
+  .filter-style{
+    margin-bottom:2%;
+    margin-top:2%;
   }

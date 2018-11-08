@@ -1,65 +1,68 @@
-<h1>Rating Dashboard</h1>
+<h1>Rating List</h1>
 
 <ng-container >
-  <p>you have items in your rating Dashboard</p>
-  <div class="row">
-    <div class="col-4">
-            <input #query (keyup)="filterItemsByComment(query.value)" type="text" class="form-control" placeholder="search ...">
-    </div>
-    <div class="col-1" *ngFor="let r of allRates">
-            <button type="button" class="{{r.className}} btn-circle btn-lg buttons-style " (click)="filterRating(r)">{{r.rating}}</button>
+  <div class="row" *ngIf="errorMsg" >
+    <div class="alert alert-primary col-12" role="alert">
+      {{errorMsg}}
     </div>
   </div>
- <div class="row">
-    <table class="table" [mfData]="filterdItems" #mf="mfDataTable" [mfRowsOnPage]="5">
-        <thead class="thead-dark">
-            <tr>
-              <th  style="width: 10%">
-                  <mfDefaultSorter by="rating">Rating</mfDefaultSorter>
-              </th>
-              <th style="width: 40%">
-                  <mfDefaultSorter by="comment">Comment</mfDefaultSorter>
-              </th>
-              <th style="width: 10%">
-                  <mfDefaultSorter by="computed_browser.Browser">Browser</mfDefaultSorter>
-              </th>
-              <th style="width: 10%">
-                  <mfDefaultSorter by="device">Device</mfDefaultSorter>
-              </th>
-              <th style="width: 20%">
-                  <mfDefaultSorter by="computed_browser.Platform">Platform</mfDefaultSorter>
-              </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of mf.data" >
-              <!--  -->
-            <td>
-                <span class="btn btn btn-info btn-circle">{{item.rating}}</span>
-            </td>
-            <td>
-              {{item.comment}}
-            </td>
-            <td>
-              {{item.computed_browser.Browser}}
-              <p>{{item.computed_browser.Version}}</p>
-            </td>
-            <td>
-              {{item.device}}
-            </td>
-            <td>
-              {{item.computed_browser.Platform}}
-            </td>                      
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-              <td colspan="4">
-                  <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+  <div class="row" *ngIf="!errorMsg"> 
+      <div class="col-md-4 col-sm-12 filter-style">
+        <input #query (keyup)="filterItemsByComment(query.value)" type="text" class="form-control" placeholder="search ...">
+      </div>
+      <div class="col-1 filter-style" *ngFor="let r of allRates">
+        <button type="button" class="{{r.className}} btn-circle btn-lg buttons-style " (click)="filterRating(r)">{{r.rating}}</button>
+      </div>
+    </div>
+    <div class="row" *ngIf="!errorMsg">
+      <table class="table" [mfData]="filterdItems" #mf="mfDataTable" [mfRowsOnPage]="5">
+          <thead class="thead-dark">
+              <tr>
+                <th  style="width: 10%">
+                    <mfDefaultSorter by="rating">Rating</mfDefaultSorter>
+                </th>
+                <th style="width: 40%">
+                    <mfDefaultSorter by="comment">Comment</mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                    <mfDefaultSorter by="computed_browser.Browser">Browser</mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                    <mfDefaultSorter by="device">Device</mfDefaultSorter>
+                </th>
+                <th style="width: 20%">
+                    <mfDefaultSorter by="computed_browser.Platform">Platform</mfDefaultSorter>
+                </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of mf.data" >
+                <!--  -->
+              <td>
+                  <span class="btn btn btn-info btn-circle">{{item.rating}}</span>
               </td>
-          </tr>
-        </tfoot>
-      </table>
- </div>
-  
+              <td>
+                {{item.comment}}
+              </td>
+              <td>
+                {{item.computed_browser.Browser}}
+                <p>{{item.computed_browser.Version}}</p>
+              </td>
+              <td>
+                {{item.device}}
+              </td>
+              <td>
+                {{item.computed_browser.Platform}}
+              </td>                      
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+                <td colspan="5">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                </td>
+            </tr>
+          </tfoot>
+        </table>
+    </div>  
 </ng-container>

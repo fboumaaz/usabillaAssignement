@@ -28,7 +28,7 @@ describe('BsNavbarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    //expect(component).toBeTruthy();
+  it('should be created', () => {
+    expect(component).toBeTruthy();
   });
 });

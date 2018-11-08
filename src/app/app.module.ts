@@ -27,8 +27,9 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
+      { path: '',  redirectTo: '/dashboard', pathMatch: 'full' },
       {   
-        path: 'home',
+        path: 'dashboard',
         component: DashboardComponent,
       },
       {   
